@@ -23,11 +23,6 @@ variable "short_name" {
   description = "Shortened version of resource name."
 }
 
-variable "vnet_address_space" {
-  type = list(string)
-  description = "Address space for the virtual network."
-}
-
 variable "address_prefixes" {
   type = list(string)
   description = "List of address prefixes for the subnet."
