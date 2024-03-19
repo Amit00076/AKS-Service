@@ -4,10 +4,6 @@ module "naming-convention" {
   version = "1.0.1"
 }
 
-resource "azurerm_user_assigned_identity" "aks" {
-  location            = var.location
-  resource_group_name = var.resource_group
-
 #add "short_resource.azurerm_kubernetes_cluster" in the module.naming-convention repo to use
 
 resource "azurerm_kubernetes_cluster" "aks" {
