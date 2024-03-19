@@ -45,10 +45,6 @@ output "oms_agent_enabled" {
   value       = can(azurerm_kubernetes_cluster.aks.oms_agent[0])
 }
 
-output "user_assigned_identity_id" {
-  value = azurerm_user_assigned_identity.aks.id
-  description = "ID of the User Assigned Identity"
-}
 
 
 
