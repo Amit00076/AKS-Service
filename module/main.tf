@@ -1,24 +1,16 @@
 
 module "naming-convention" {
-  source = "localterraforn.com/AzurePMR/naming-convention/azurere"
+  source = "localterraform.com/AzurePMR/naming-convention/azurerm"
   version = "1.0.1"
 }
 
-
-resource "random_id" "prefix" {
-  byte_length = 8
-}
-
-
 resource "azurerm_user_assigned_identity" "aks" {
   location            = var.location
-  name                = "${random_id.prefix.hex}-identity"
   resource_group_name = var.resource_group
 
+#add "short_resource.azurerm_kubernetes_cluster" in the module.naming-convention repo to use
 
 resource "azurerm_kubernetes_cluster" "aks" {
-  resource_group_name                     = var.resource_group
-  node_resource_group                     = var.node_resource_group
   kubernetes_version                      = var.kubernetes_master_version
   location                                = var.location
   name                                    = ${module.naming-convention.short_resource.azurerm_kubernetes_cluster}-${var.short_location}-${var.short_env}-${var.ait}-${var.short_name}-np
@@ -30,7 +22,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
       max_pods                            = var.max_pods
       min_count                           = var.min_count
       name                                = var.node_pool_name
-      mode_count                          = var.node_count
+      node_count                          = var.node_count
       node_labels                         = var.node_labels
       kubelet_disk_type                   = var.kubelet_disk_type
       node_taints                         = var.node_taints
@@ -60,8 +52,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
 #Integration
-  private_dns_zone_id                     = var.private_dns_zone_id
-  dns_prefix                              = var.dns_prefix
   private_cluster_enabled                 = var.private_cluster_enabled
   private_cluster_public_fqdn_enabled     = var.private_cluster_public_fqdn_enabled
   azure_policy_enabled                    = var.azure_policy_enabled  
