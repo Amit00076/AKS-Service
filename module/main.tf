@@ -8,10 +8,6 @@ resource "azurerm_service_plan" "ASP" {
   os_type             		= "Linux"
 
 
-
-#The maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan.
-  maximum_elastic_worker_count = var.maximum_elastic_worker_count
-
   sku {
     tier     = var.sku_tier
     size     = var.sku_size              
