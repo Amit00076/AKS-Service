@@ -5,14 +5,8 @@ resource "azurerm_service_plan" "ASP" {
   name                         = ${module.naming-convention.short_resource.azurerm_service_plan}-${var.short_location}-${var.short_env}-${var.ait}-${var.short_name}
   resource_group_name          = var.azurerm_resource_group
   location                     = var.location
-  os_type             		= "Linux"
-
-
-  sku {
-    tier     = var.sku_tier
-    size     = var.sku_size              
-    name     = var.sku_name
-  }
+  os_type                      = var.os_type
+  sku_name                     = var.sku_name
 
   tags             = local.tags
   
